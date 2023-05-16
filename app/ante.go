@@ -61,6 +61,7 @@ func NewAnteHandler(options AnteHandlerOptions) (sdk.AnteHandler, error) {
 		sdkante.NewSigVerificationDecorator(options.AccountKeeper, options.SignModeHandler),
 		sdkante.NewIncrementSequenceDecorator(options.AccountKeeper),
 		ibcante.NewAnteDecorator(options.IBCKeeper),
+		ante.NewBalanceExposerDecorator(options.AccountKeeper, options.BankKeeper),
 	}
 
 	return sdk.ChainAnteDecorators(anteDecorators...), nil
